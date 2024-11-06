@@ -1,3 +1,5 @@
+import re
+
 # Taxitarif Frankfurt
 # Grundgebühr:                      4,00 EUR
 # Kilometerpreis bis inkl. 3km:     2,80 EUR
@@ -11,6 +13,15 @@ KILOMETER_PRICE_THIRD_SECTION = 2.10
 FIRST_SECTION_KILOMETERS = 3
 SECOND_SECTION_KILOMETERS = 7
 THIRD_SECTION_KILOMETERS_ABOVE = 7
+
+def getInput():
+    userInput = input("How far would you like to drive in km: ")
+
+    if not re.match(r"\d+(\.\d+)?", userInput):
+        print(f"not a number: {userInput}")
+        return getInput()
+
+    return float(userInput)
 
 def calcFirstSection(kilometers=FIRST_SECTION_KILOMETERS):
     return KILOMETER_PRICE_FIRST_SECTION * kilometers
@@ -39,7 +50,8 @@ def printReceipt(total, firstSectionTotal, secondSectionTotal=None, thirdSection
     print(f"\tTotal: \t\t\t\t\t{"  " if total < 10 else " " if total < 100 else ""}{total:.2f} EUR")
     print(f"\nThank you for traveling with us, have a save trip! :)\n\n")
 
-kilometers = float(input("How far would you like to drive in km: "))
+kilometers = getInput()
+
 if kilometers <= FIRST_SECTION_KILOMETERS:
     firstSectionTotal = calcFirstSection(kilometers)
     total = calcTotal(firstSectionTotal)
