@@ -29,14 +29,14 @@ def getSpacing(value):
 
 def printReceipt(total, firstSectionTotal, secondSectionTotal=None, thirdSectionTotal=None):
     print(f"\n\nReceipt for your trip ({kilometers}km):")
-    print(f"\tBase price: \n\t\t  {BASE_PRICE:.2f} EUR")
-    print(f"\tKilometers 0 - 3: \n\t\t  {firstSectionTotal:.2f} EUR")
+    print(f"\tBase price: \t\t\t\t  {BASE_PRICE:.2f} EUR")
+    print(f"\tKilometers 0 - 3   (each {KILOMETER_PRICE_FIRST_SECTION:.2f} EUR): \t  {firstSectionTotal:.2f} EUR")
     if secondSectionTotal != None:
-        print(f"\tKilometers 3 - 7: \n\t\t{getSpacing(secondSectionTotal)}{secondSectionTotal:.2f} EUR")
+        print(f"\tKilometers 3 - 7   (each {KILOMETER_PRICE_SECOND_SECTION:.2f} EUR): \t{getSpacing(secondSectionTotal)}{secondSectionTotal:.2f} EUR")
     if thirdSectionTotal != None:
-        print(f"\tKilometers above 7: \n\t\t{getSpacing(thirdSectionTotal)}{thirdSectionTotal:.2f} EUR")
-    print("\t\t================")
-    print(f"\tTotal: \n\t\t{"  " if total < 10 else " " if total < 100 else ""}{total:.2f} EUR")
+        print(f"\tKilometers above 7 (each {KILOMETER_PRICE_THIRD_SECTION:.2f} EUR): \t{getSpacing(thirdSectionTotal)}{thirdSectionTotal:.2f} EUR")
+    print("\t\t\t====================================")
+    print(f"\tTotal: \t\t\t\t\t{"  " if total < 10 else " " if total < 100 else ""}{total:.2f} EUR")
     print(f"\nThank you for traveling with us, have a save trip! :)\n\n")
 
 kilometers = float(input("How far would you like to drive in km: "))
