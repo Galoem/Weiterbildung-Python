@@ -32,11 +32,11 @@ def calcSecondSection(kilometers=SECOND_SECTION_KILOMETERS):
 def calcThirdSection(kilometers):
     return KILOMETER_PRICE_THIRD_SECTION * (kilometers - SECOND_SECTION_KILOMETERS)
 
-def calcTotal(firstSectionTotal, secondSectionTotal=0, thirdSectionTotal=0):
-    return BASE_PRICE + firstSectionTotal + secondSectionTotal + thirdSectionTotal
-
 def getSpacing(value):
     return "  " if value < 10 else " " if value < 100 else ""
+
+def calcTotal(firstSectionTotal, secondSectionTotal=None, thirdSectionTotal=None):
+    return BASE_PRICE + firstSectionTotal + (secondSectionTotal if secondSectionTotal != None else 0) + (thirdSectionTotal if thirdSectionTotal != None else 0)
 
 def printReceipt(total, firstSectionTotal, secondSectionTotal=None, thirdSectionTotal=None):
     print(f"\n\nReceipt for your trip ({kilometers}km):")
@@ -54,18 +54,18 @@ kilometers = getInput()
 
 if kilometers <= FIRST_SECTION_KILOMETERS:
     firstSectionTotal = calcFirstSection(kilometers)
-    total = calcTotal(firstSectionTotal)
-    printReceipt(total, firstSectionTotal)
+    secondSectionTotal = None
+    thirdSectionTotal = None
 
 elif kilometers <= SECOND_SECTION_KILOMETERS:
     firstSectionTotal = calcFirstSection()
     secondSectionTotal = calcSecondSection(kilometers)
-    total = calcTotal(firstSectionTotal, secondSectionTotal)
-    printReceipt(total, firstSectionTotal, secondSectionTotal)
+    thirdSectionTotal = None
 
 else:
     firstSectionTotal = calcFirstSection()
     secondSectionTotal = calcSecondSection()
     thirdSectionTotal = calcThirdSection(kilometers)
-    total = calcTotal(firstSectionTotal, secondSectionTotal, thirdSectionTotal)
-    printReceipt(total, firstSectionTotal, secondSectionTotal, thirdSectionTotal)
+
+total = calcTotal(firstSectionTotal, secondSectionTotal, thirdSectionTotal)
+printReceipt(total, firstSectionTotal, secondSectionTotal, thirdSectionTotal)
