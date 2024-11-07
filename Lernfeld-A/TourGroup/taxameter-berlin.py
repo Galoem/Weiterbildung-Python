@@ -1,5 +1,3 @@
-import re
-
 # Taxitarif Frankfurt
 # Grundgebühr:                      4,00 EUR
 # Kilometerpreis bis inkl. 3km:     2,80 EUR
@@ -17,7 +15,7 @@ THIRD_SECTION_KILOMETERS_ABOVE = 7
 def getInput():
     userInput = input("How far would you like to drive in km: ")
 
-    if not re.match(r"\d+(\.\d+)?", userInput):
+    if not userInput.isnumeric():
         print(f"not a number: {userInput}")
         return getInput()
 
