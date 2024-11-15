@@ -182,10 +182,10 @@ print(wordsOfLength5OrGreater, separator)
 # Schreibe ein Programm, das eine 3x3-Matrix mit Zahlen von 1 bis 9 ausgibt.
 print("Aufgabe 15 - Matrix")
 
-result2 = ""
+result = ""
 for number in range(1, 10):
-    result2 += str(number) + f" {"\n" if number % 3 == 0 else ""}"
-print(result2, separator)
+    result += f"{number} {"\n" if number % 3 == 0 else ""}"
+print(result)
 
 # 16. Zahlenreihe mit Bedingung und Schrittweite:
 # Schreibe ein Programm, das die Zahlen von 1 bis 100 mit einer Schrittweite von 7 ausgibt, aber jede Zahl durch "Boom" ersetzt, wenn sie durch 7 teilbar ist.
