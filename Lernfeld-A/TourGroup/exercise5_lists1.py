@@ -38,11 +38,15 @@ ausgangsliste = [68, 44, 52, 92, 11, 4, 61, 69, 67, 3]
 
 # Füge hier eine Reihe von pop-Methodenaufrufen ein:
 # eingangsliste.insert(0, 68)
-# eingangsliste.insert(index, wer0)
+# eingangsliste.insert(index, wert)
 # ...
 
 # Anfang Lösung
 
+for index in range(len(ausgangsliste),0,-1):
+    element = ausgangsliste[index - 1]
+    if element not in eingangsliste:
+        ausgangsliste.pop(index - 1)
 
 # Ende Lösung
 
@@ -69,6 +73,9 @@ ausgangsliste = [68, 44, 52, 92, 11, 4, 61, 69, 67, 3]
 
 # Anfang Lösung
 
+for (index, element) in enumerate(ausgangsliste):
+    eingangsliste[index] = ausgangsliste[index]
+
 # Ende Lösung
 
 print(f"Eingangsliste: {eingangsliste}")
@@ -94,6 +101,10 @@ ausgangsliste = [68, 30, 52, 92, 54, 4, 61, 67, 1]
 
 # Anfang Lösung
 
+for index in range(len(ausgangsliste),0,-1):
+    element = ausgangsliste[index - 1]
+    if element not in eingangsliste:
+        ausgangsliste.pop(index - 1)
 
 # Ende Lösung
 
@@ -104,8 +115,6 @@ if eingangsliste == ausgangsliste:
     print("Listen sind identisch! Geschafft!")
 else:
     print("Noch entspricht die Eingangsliste nicht der Ausgangsliste")
-
-
 
 # Aufgabe 5:
 # Listen können ebenso wie Strings konkatiniert werden:
