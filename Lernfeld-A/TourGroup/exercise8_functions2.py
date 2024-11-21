@@ -29,13 +29,14 @@ print(name2("Stefan", 54))
 
 print("\nAufgabe 3\n")
 
-def flip_coin():
-    coin_flip = randint(0,1)
-    return f"{"Kopf" if coin_flip == 1 else "Zahl"}"
+def flip_coin(frequency: int) -> str:
+    coin_flips = []
+    for _ in range(frequency):
+        coin_flips.append("Kopf" if randint(0,1) else "Zahl")
+    return coin_flips
 
 # Beispielaufruf
-for i in range(10):
-    print(flip_coin())
+print(flip_coin(10))
 
 # 4.  Schreibe eine Funktion zur Kreisberechnung, die zwei Argumente übernimmt: einen Zahlenwert
 # und einen String, der aussagt, ob dieser Zahlenwert als Radius, Umfang oder Fläche zu verstehen ist.
@@ -44,25 +45,37 @@ for i in range(10):
 
 print("\nAufgabe 4\n")
 
-def calc_circle(value: int |float, unit: str ="r") -> str:
+def calc_circumference_from_radius(radius: int | float) -> float:
+    return pi * (radius * 2)
+
+def calc_circumference_from_area(area: int | float) -> int | float:
+    return 2 * sqrt((pi * area))
+
+def calc_area_from_radius(radius: int | float) -> int | float:
+    return pi * (radius ** 2)
+
+def calc_radius_from_circumference(circumference: int | float) -> int | float:
+    return circumference / (2 * pi)
+
+def calc_circle(value: int | float, unit: str = "r") -> str:
     area = 0
     circumference = 0
     radius = 0
     match unit:
         case "r":
             radius = value
-            circumference = pi * (radius * 2)
-            area = pi * (radius ** 2)
+            circumference = calc_circumference_from_radius(radius)
+            area = calc_area_from_radius(radius)
             return f"Given is a circle with a radius of {value:.2f}. The circumference equals {circumference:.2f} and the surface area equals {area:.2f}."
         case "a":
             area = value
-            circumference = 2 * sqrt((pi * area))
-            radius = circumference / (2 * pi)
+            circumference = calc_circumference_from_area(area)
+            radius = calc_radius_from_circumference(circumference)
             return f"Given is a circle with a surface area of {value:.2f}. The radius equals {radius:.2f} and the circumference equals {circumference:.2f}."
         case "c":
             circumference = value
-            radius = circumference / (2 * pi)
-            area = pi * (radius ** 2)
+            radius = calc_radius_from_circumference(circumference)
+            area = calc_area_from_radius(radius)
             return f"Given is a circle with a circumference of {value:.2f}. The radius equals {radius:.2f} and the surface area equals {area:.2f}."
         case _:
             return f"{unit} is not valid, please use 'r' for radius, 'a' for area or 'c' for circumference"
@@ -81,8 +94,8 @@ print("\nAufgabe 5\n")
 
 def pwgenSimple(pw_length: int) -> str:
     pw = ""
-    for i in range(pw_length):
-        pw += chr(randint(33, 126))
+    for _ in range(pw_length):
+        pw += chr(randint(ord("!"), ord("z")))
     return pw
 
 # Beispielaufruf
@@ -97,7 +110,7 @@ print("\nAufgabe 6\n")
 def get_character_in_range(start_character: str, end_character: str):
     character = chr(randint(ord(start_character), ord(end_character)))
     while character in ["i", "o", "l", "I", "O", "L"]:
-        chr(randint(ord(start_character), ord(end_character)))
+        character = chr(randint(ord(start_character), ord(end_character)))
     return character
 
 def pwgen_lower_letters(length: int) -> str:
