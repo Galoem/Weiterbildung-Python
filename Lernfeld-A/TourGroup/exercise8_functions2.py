@@ -96,7 +96,7 @@ print("\nAufgabe 6\n")
 
 def get_character_in_range(start_character: str, end_character: str):
     character = chr(randint(ord(start_character), ord(end_character)))
-    while character in ["i", "o", "I", "O"]:
+    while character in ["i", "o", "l", "I", "O", "L"]:
         chr(randint(ord(start_character), ord(end_character)))
     return character
 
