@@ -1,4 +1,5 @@
-from random import randint
+import string
+import random
 from math import pi, sqrt
 
 # 1. Schreibe eine Funktion, die deinen Namen und dein Alter als Argumente 
@@ -32,7 +33,7 @@ print("\nAufgabe 3\n")
 def flip_coin(frequency: int) -> str:
     coin_flips = []
     for _ in range(frequency):
-        coin_flips.append("Kopf" if randint(0,1) else "Zahl")
+        coin_flips.append("Kopf" if random.randint(0,1) else "Zahl")
     return coin_flips
 
 # Beispielaufruf
@@ -95,7 +96,7 @@ print("\nAufgabe 5\n")
 def pwgenSimple(pw_length: int) -> str:
     pw = ""
     for _ in range(pw_length):
-        pw += chr(randint(ord("!"), ord("z")))
+        pw += chr(random.randint(ord("!"), ord("z")))
     return pw
 
 # Beispielaufruf
@@ -108,52 +109,77 @@ print(pwgenSimple(20))
 print("\nAufgabe 6\n")
 
 def get_character_in_range(start_character: str, end_character: str):
-    character = chr(randint(ord(start_character), ord(end_character)))
+    character = chr(random.randint(ord(start_character), ord(end_character)))
     while character in ["i", "o", "l", "I", "O", "L"]:
-        character = chr(randint(ord(start_character), ord(end_character)))
+        character = chr(random.randint(ord(start_character), ord(end_character)))
     return character
 
 def pwgen_lower_letters(length: int) -> str:
     pw = ""
-    for i in range(length):
+    for _ in range(length):
         pw += get_character_in_range("a", "z")
     return pw
 
 def pwgen_upper_letters(length: int) -> str:
     pw = ""
-    for i in range(length):
+    for _ in range(length):
         pw += get_character_in_range("A", "Z")
     return pw
 
 def pwgen_numbers(length: int) -> str:
     pw = ""
-    for i in range(length):
+    for _ in range(length):
         pw += get_character_in_range("0", "9")
     return pw
 
 def pwgen_specials(length: int) -> str:
     pw = ""
-    for i in range(length):
+    for _ in range(length):
         pw += get_character_in_range("!", "/")
     return pw
 
 def pwgenPro(length_lower: int, length_upper: int, length_numbers: int, length_specials: int) -> str:
+    """
+    Generates a random password.
+
+    Paramaters:
+        :param length_lower (int): number of lower alpha characters.
+        :param length_upper (int): number of upper alpha characters.
+        :param length_number (int): number of numberic characters.
+        :param length_specials (int): number of special characters.
+
+    Returns:
+        a shuffled password containing a number of differen characters.
+    """
     pw = ""
     while length_lower + length_upper + length_numbers + length_specials > 0:
-        character_type = randint(0, 3)
+        character_type = random.randint(0, 3)
         if (character_type == 0 and length_lower > 0):
             pw += pwgen_lower_letters(1)
             length_lower -= 1
-        if (character_type == 1 and length_upper > 0):
+        elif (character_type == 1 and length_upper > 0):
             pw += pwgen_upper_letters(1)
             length_upper -= 1
-        if (character_type == 2 and length_numbers > 0):
+        elif (character_type == 2 and length_numbers > 0):
             pw += pwgen_numbers(1)
             length_numbers -= 1
-        if (character_type == 3 and length_specials > 0):
+        elif (character_type == 3 and length_specials > 0):
             pw += pwgen_specials(1)
             length_specials -= 1
     return pw
 
 # Beispielaufruf
 print(pwgenPro(5,5,5,5))
+
+
+# Alternative
+def pwgenPro2(length_lower: int, length_upper: int, length_numbers: int, length_specials: int) -> str:
+    pw = []
+    pw += random.choices(string.ascii_lowercase, k=length_lower)
+    pw += random.choices(string.ascii_uppercase, k=length_upper)
+    pw += random.choices(string.digits, k=length_numbers)
+    pw += random.choices(string.punctuation, k=length_specials)
+    random.shuffle(pw)
+    return "".join(pw)
+
+print(pwgenPro2(5,5,5,5))
