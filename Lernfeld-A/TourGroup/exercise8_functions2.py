@@ -59,9 +59,14 @@ def calc_radius_from_circumference(circumference: int | float) -> int | float:
     return circumference / (2 * pi)
 
 def calc_circle(value: int | float, unit: str = "r") -> str:
+    """
+    Parameters:
+        :param value (int | float): Value for calculation.
+        :param unit (str): Unit of value -> 'r' for radius, 'a' for area or 'c' for circumference.
+    """
     area = 0
-    circumference = 0
     radius = 0
+    circumference = 0
     match unit:
         case "r":
             radius = value
@@ -87,6 +92,7 @@ print(calc_circle(10))
 print(calc_circle(10, "r"))
 print(calc_circle(20, "a"))
 print(calc_circle(20, "c"))
+print(calc_circle(20, "z")) # invalid
 
 # 5.  Schreibe einen Passwortgenerator, der als Argument die Länge des Passwortes übernimmt
 # und dieses zurück gibt.
