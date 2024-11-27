@@ -36,11 +36,36 @@ print("Aufgabe 3\n")
 # 4 Erzeuge die Liste [[[1,2,3],[4,5,6],[7,8,9]], [10,11,12],[13,14,15],[16,17,18]], [18,20,21],[22,23,24],[25,26,27]]]
 #   mittels LC
 
-liste4=[]
-
-
 print("Aufgabe 4\n")
+
+GROUP_SIZE = 3
+liste4=[]
+counter = 1
+for i in range(GROUP_SIZE):
+    i_list = []
+    liste4.append(i_list)
+    for j in range(GROUP_SIZE):
+        j_list = []
+        i_list.append(j_list)
+        for k in range (GROUP_SIZE):
+            j_list.append(counter)
+            counter += 1
+
 print(liste4)
+
+
+
+def box(lst: list, depth: int):
+    print(f"list: {lst}, depth: {depth}")
+    if (depth > 0):
+        boxed_list = lst.append(list())
+        print(f"{depth} - boxed: {boxed_list}")
+        boxed = box(boxed_list, (depth - 1))
+        return boxed
+    return lst
+
+lst = []
+print(box(lst=lst, depth=5))
 
 
 # 5 Aus der Liste ["Tick", "Trick", "Track", "Bibi", "Baba", "Bubu", "Ulrike"]
