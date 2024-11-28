@@ -3,7 +3,7 @@
 
 print("Aufgabe 1\n")
 
-def square(base: int | float):
+def square(base: int | float) -> int | float:
     return base * base
 
 # Beispielaufruf
@@ -14,7 +14,7 @@ print(square(3))
 
 print("\nAufgabe 2\n")
 
-def sum(a : int | float | str, b : int | float | str):
+def sum(a : int | float | str, b : int | float | str) -> int | float | str:
     return a + b
 
 # Beispielaufruf
@@ -27,7 +27,7 @@ print(sum(2.3, 6.8))
 
 print("\nAufgabe 3\n")
 
-def length(s: str):
+def length(s: str) -> int:
     return len(s)
 
 # Beispielaufruf
@@ -40,7 +40,7 @@ print(length("Das ist ein String"))
 
 print("\nAufgabe 4\n")
 
-def max(a : int | float, b :int | float):
+def max(a : int | float, b :int | float) -> int | float:
     return a if a > b else b
 
 # Beispielaufruf
@@ -51,7 +51,7 @@ print(max(10,5))
 
 print("\nAufgabe 5\n")
 
-def caps_lock(s:str):
+def caps_lock(s:str) -> str:
     return s.upper() if type(s) == str else f"'{s}' is not a string."
 
 # Beispielaufruf
@@ -64,7 +64,7 @@ print(caps_lock({"Hallo":"Dictionary"})) # Muss abgefangen werden, weil kein Str
 
 print("\nAufgabe 6\n")
 
-def is_even(a : int | float):
+def is_even(a : int | float) -> bool:
     if type(a) == int:
         return a % 2 == 0
     else:
@@ -93,7 +93,7 @@ print(reverse("HAllo"))
 
 print("\nAufgabe 8\n")
 
-def average(number: int | float, *more_numbers: int | float):
+def average(number: int | float, *more_numbers: int | float) -> float:
     total = number
     for number in more_numbers:
         total += number
