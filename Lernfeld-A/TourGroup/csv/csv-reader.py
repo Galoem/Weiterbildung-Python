@@ -28,7 +28,7 @@ from pprint import pprint
 # pprint(dict_data)
 
 my_dict = dict()
-with open('Erwerbstaetige.csv', 'r') as csv_file:
+with open("Erwerbstaetige.csv", "r") as csv_file:
     csv_dict_reader = csv.DictReader(csv_file, delimiter=";")
 
     for line in csv_dict_reader:
