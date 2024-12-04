@@ -1,5 +1,7 @@
 # from pprint import pprint # pretty print
+import os
 
+# save for later usage
 # task1 = { "author" : "Maria Hilbert", "title" : "Built-In-Funktionen", "competence": "Funktionen", "questions" : [ question1, question2 ] }
 # task2 = { "author": "Johan Müller", "title": "Variablennamen", "competence": "Syntax", "questions": [ question3, question4 ] }
 # task3 = { "author" : "Maria Hilbert", "title": "Arbeiten mit Listen", "competence": "Listen", "questions": [ question5, question6 ] }
@@ -67,8 +69,8 @@ question5 = {
 question6 = {
     "question": "Welche Antwort konkateniert zwei Listen?",
     "answers": {
-        "[1,2,3] + [4,5,6]",
-        "[1,2,3] and [4,5,6]"
+        1: "[1,2,3] + [4,5,6]",
+        2: "[1,2,3] and [4,5,6]"
     },
     "correct_answer": 1,
     "author": AUTHOR_MARIA_HILBERT,
@@ -77,9 +79,9 @@ question6 = {
 question7 = { 
     "question": "Welcher Funktionskopf ist gültig?", 
     "answers": {
-        "def my_function():", 
-        "fct my_method():", 
-        "int my_function(void)" 
+        1: "def my_function():", 
+        2: "fct my_method():", 
+        3: "int my_function(void)" 
     },
     "correct_answer": 1, 
     "author": AUTHOR_JOHAN_MUELLER,
@@ -102,6 +104,11 @@ quiz = {
     "points_total": 0,
     "points_reached": 0
 }
+
+def clear():
+    print("\n==============================\n")
+    input("Press Enter to continue... ")
+    os.system("cls" if os.name == "nt" else "clear")
 
 def get_questions() -> dict:
     return quiz.get("questions")
@@ -161,27 +168,23 @@ def validate_answer(quiz: dict, question: dict, user_answer: dict, correct_answe
     else:
         print(f"Your answer was not correct, the correct answer would have been: {correct_answer}")
 
-# pprint(quiz)
-
 print("""
 ==================
 === Start quiz ===
 ==================
 """)
 print("Hello Quizzee!")
-quizzee_name = ""
-# quizzee_name = input("Please insert your name: ")
+quizzee_name = input("Please enter your name: ")
 
 quiz.update({"quizzee": quizzee_name if quizzee_name != "" else "Quizzee"})
 print(f"""
 Welcome {quiz.get("quizzee")}.
-Then let us begin!
-""")
+Then let us begin!""")
 questions= get_questions()
 
 for question in questions:
     question: dict
-    print("====================")
+    clear()
     print_question(question)
     answer = get_valid_answer(question)
     print("====================")
@@ -191,5 +194,6 @@ for question in questions:
     quiz.update({"points_total": get_total_points(quiz) + question.get("points")})
     print(f"Total Points reachable so far: {get_total_points(quiz)}.")
 
-print(f"You finished the quiz and reached {get_current_points(quiz)} of {get_total_points(quiz)} points.")
-print(f"That equals {(get_current_points(quiz) / get_total_points(quiz) * 100):.0f}% of total points.")
+clear()
+print(f"Congratulations {quizzee_name}, you finished the quiz and reached {get_current_points(quiz)} of {get_total_points(quiz)} points!")
+print(f"That equals {(get_current_points(quiz) / get_total_points(quiz) * 100):.0f}% of total points!")
