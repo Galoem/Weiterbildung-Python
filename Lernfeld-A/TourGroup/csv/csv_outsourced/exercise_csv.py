@@ -1,4 +1,5 @@
-import csv
+from plots import line_chart
+from file_reader import read_csv_dict
 from pprint import pprint
 
 # Aufgaben CSV:
@@ -8,44 +9,9 @@ from pprint import pprint
 
 print("\nAufgaben 1 & 2")
 
-def is_float(input: str) -> bool:
-    try:
-        float(input)
-        return True
-    except:
-        return False
-
-def pop_empty_keys_and_year(entry):
-    entry.pop("Jahr")
-    if "" in entry.keys():
-        entry.pop("")
-
-def build_inner_dict(result_dict):
-    for entry in result_dict.values():
-        entry: dict
-        pop_empty_keys_and_year(entry)
-
-        for (key, value) in entry.items():
-            value: str
-            value_no_whitespaces = value.replace(" ", "").replace(",", ".")
-            if is_float(value_no_whitespaces):
-                numeric_value = float(value_no_whitespaces)
-                entry.update({key: numeric_value})
-
-def read_csv_dict(file_name: str, delimiter: str) -> dict:
-    result_dict = dict()
-    with open(file_name, mode="r") as csv_file:
-        csv_reader = csv.DictReader(csv_file, delimiter=delimiter)
-
-        for line in csv_reader:
-            result_dict.update({line["Jahr"]: line})
-
-        build_inner_dict(result_dict)
-    return result_dict
-
-erwerbstaetige = read_csv_dict("Erwerbstaetige.csv", ";")
-lohnentwicklung = read_csv_dict("Lohnentwicklung.csv", ";")
-konsumentwicklung = read_csv_dict("Konsumentwicklung.csv", ";")
+erwerbstaetige = read_csv_dict("../source_data/Erwerbstaetige.csv", ";")
+lohnentwicklung = read_csv_dict("../source_data/Lohnentwicklung.csv", ";")
+konsumentwicklung = read_csv_dict("../source_data/Konsumentwicklung.csv", ";")
 
 # print("""
 # ==========================
@@ -143,14 +109,54 @@ for year in years_erwerb:
 
 print("\nAufgabe 7")
 
+TOTAL_KONSUM = "Insgesamt"
+NETTO = "Nettolohn"
+RATIO = "Ratio"
+
 years_konsum = list(konsumentwicklung.keys())
+years_lohn = list(lohnentwicklung.keys())
+lohn_konsum_ratio = dict()
 
 for year in years_konsum:
-    value: dict = erwerbstaetige.get(year)
+    value: dict = konsumentwicklung.get(year)
+    total = value.get(TOTAL_KONSUM)
+    lohn_konsum_ratio.update({year: {TOTAL_KONSUM: total}})
     
+for year in years_lohn:
+    value: dict = lohnentwicklung.get(year)
+    net = value.get(NETTOLOEHNE)
+    konsum_total_entry: dict = lohn_konsum_ratio.get(year)
+    konsum_total_entry.update({NETTO: net})
+    total_konsum = konsum_total_entry.get(TOTAL_KONSUM)
+    konsum_total_entry.update({RATIO: total_konsum / net * 100})
+
+pprint(lohn_konsum_ratio)
 
 # 8. Berechne die Differenz von Löhnen und Konsum über die Zeitreihen.
 
+DIFF = "Diff"
 
+lohn_konsum_diff = dict()
+
+for year in years_konsum:
+    value: dict = konsumentwicklung.get(year)
+    total = value.get(TOTAL_KONSUM)
+    lohn_konsum_diff.update({year: {TOTAL_KONSUM: total}})
+    
+for year in years_lohn:
+    value: dict = lohnentwicklung.get(year)
+    net = value.get(NETTOLOEHNE)
+    konsum_total_entry: dict = lohn_konsum_diff.get(year)
+    konsum_total_entry.update({NETTO: net})
+    total_konsum = konsum_total_entry.get(TOTAL_KONSUM)
+    konsum_total_entry.update({DIFF: net - total_konsum})
+
+# pprint(lohn_konsum_diff, width=30)
 
 # 9. Zu den Aufgaben 3-8 stelle das Ergebnis in einem geigneten Diagramm aus der Matplotlib dar.
+
+# Aufgabe 3
+line_chart.create_plot(lohnentwicklung_increase, "Aufgabe 3: Salary increase from 1970 - 2022", "Years", "Salary")
+
+# Aufgabe 4
+line_chart.create_plot(net_gross_ratio, "Aufgabe 4: gross / net ratio from 1970 - 2022", "Years", "Ratio")
