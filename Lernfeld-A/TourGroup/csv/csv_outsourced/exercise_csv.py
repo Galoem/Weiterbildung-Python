@@ -130,9 +130,11 @@ for year in years_lohn:
     total_konsum = konsum_total_entry.get(TOTAL_KONSUM)
     konsum_total_entry.update({RATIO: total_konsum / net * 100})
 
-pprint(lohn_konsum_ratio)
+# pprint(lohn_konsum_ratio)
 
 # 8. Berechne die Differenz von Löhnen und Konsum über die Zeitreihen.
+
+print("\nAufgabe 8")
 
 DIFF = "Diff"
 
@@ -155,8 +157,13 @@ for year in years_lohn:
 
 # 9. Zu den Aufgaben 3-8 stelle das Ergebnis in einem geigneten Diagramm aus der Matplotlib dar.
 
-# Aufgabe 3
-line_chart.create_plot(lohnentwicklung_increase, "Aufgabe 3: Salary increase from 1970 - 2022", "Years", "Salary")
+print("\nAufgabe 9")
 
-# Aufgabe 4
-line_chart.create_plot(net_gross_ratio, "Aufgabe 4: gross / net ratio from 1970 - 2022", "Years", "Ratio")
+# # Aufgabe 3
+# line_chart.create_plot(lohnentwicklung_increase, "Aufgabe 3: Salary increase from 1970 - 2022", "Years", "Salary")
+
+# # Aufgabe 4
+# line_chart.create_plot(net_gross_ratio, "Aufgabe 4: gross / net ratio from 1970 - 2022", "Years", "Ratio")
+
+# Aufgabe 5
+line_chart.create_multi_line_plot(prod_service_ratio, "Aufgabe 5: Prod - Service - Ratio from 1970 - 2022", "Years", "Euro")
