@@ -28,6 +28,7 @@ def create_spinbox_in_grid(row: int, col: int = 2, start_value: int = 5):
     return spinbox
 
 app = tk.Tk()
+app.title("PassGen")
 app.resizable(False, False)
 app.geometry("300x200")
 
