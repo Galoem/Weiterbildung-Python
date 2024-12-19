@@ -1,7 +1,7 @@
 import random
 import string
 
-def pwgenPro2(length_lower: int, length_upper: int, length_numbers: int, length_specials: int) -> str:
+def generate_password(length_lower: int, length_upper: int, length_numbers: int, length_specials: int) -> str:
     pw = []
     pw += random.choices(string.ascii_lowercase, k=length_lower)
     pw += random.choices(string.ascii_uppercase, k=length_upper)

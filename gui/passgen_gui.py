@@ -6,7 +6,7 @@ def generate_password():
     uppers = int(spinbox_uppers.get()) if wanted_uppers.get() else 0
     numbers = int(spinbox_numbers.get()) if wanted_numbers.get() else 0
     specials = int(spinbox_specials.get()) if wanted_specials.get() else 0
-    password = passgen.pwgenPro2(lowers, uppers, numbers, specials)
+    password = passgen.generate_password(lowers, uppers, numbers, specials)
     label_password.config(text=password)
 
 def copy_to_clipboard():
