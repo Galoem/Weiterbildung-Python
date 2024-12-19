@@ -30,9 +30,9 @@ CREATE TABLE IF NOT EXISTS zr_data (
 
 # Daten importieren
 zr_topics = [
-    ['Topic1',],
-    ['Topic2',],
-    ['Topic3',],
+    ['Topic1'],
+    ['Topic2'],
+    ['Topic3'],
 ]
 
 # Zunächst die Themen in die zr_topic Tabelle einfügen
